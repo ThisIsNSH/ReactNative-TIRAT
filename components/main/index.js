@@ -70,11 +70,6 @@ export default class Main extends Component {
               text: responseJson.responses[0].textAnnotations[0].description,
               locale: responseJson.responses[0].textAnnotations[0].locale,
             })
-            this.setState({
-              description: responseJson.responses[0].textAnnotations[0].description,
-              locale: responseJson.responses[0].textAnnotations[0].locale
-            });
-
           }
           else {
             console.log("Some Error")

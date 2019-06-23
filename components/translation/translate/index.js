@@ -14,7 +14,7 @@ export default class Translate extends Component {
             <View style={styles.container}>
                 <Text style={styles.text}>{this.props.text}</Text>
                 <View style={{flexDirection: 'row',}}>
-                    <LinearGradient colors={['#89f7fe', '#66a6ff']} style={styles.gradient}>
+                    <LinearGradient colors={['#f3f3f3', '#fafafa']} style={styles.gradient}>
                         <Text style={styles.trans}>{this.props.trans}</Text>
                     </LinearGradient>
                 </View>

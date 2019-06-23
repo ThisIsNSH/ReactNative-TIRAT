@@ -16,33 +16,29 @@ export default class Translation extends Component {
 
     this.ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
     this.updateLanguage = this.updateLanguage.bind(this);
-    var i = 0;
     this.data1 = [];
 
-    this.state = {
-      dataSource: this.ds.cloneWithRows(this.data1),
-      language: 'en',
-      languages: [],
-      text: []
-    };
+    var i = 0;
 
     const { navigation } = this.props;
-    const text1 = navigation.getParam('text', ["Hello", "How are you?", "Good Morning", "What's your name?", "Thanks"]);
-    this.locale1 = navigation.getParam('locale', 'en');
+    this.text1 = navigation.getParam('text', ["Hello", "How are you?", "Good Morning", "What's your name?", "Thanks"]);
+    this.text2 = this.text1.split(/\r?\n/)
+    this.locale = navigation.getParam('locale', 'en')
 
-    this.setState = {
-      text: text1.split(/\r?\n/).filter(function (value, index, arr) {
-        return value.length > 0;
-      })
+    for (i = 0; i < this.text2.length; i++) {
+      this.data1.push({ text: this.text2[i], trans: this.text2[i] });
     }
+    
+    this.state = {
+      dataSource: this.ds.cloneWithRows(this.data1),
+      language: navigation.getParam('locale', 'en'),
+      languages: [],
+      text: this.text2
+    };
 
-    for (i = 0; i < this.state.text.length; i++) {
-      this.data1.push({ text: this.state.text[i], trans: this.state.text[i] });
-    }
-
+    console.log(this.state.dataSource)
     console.log(this.state.text)
-    console.log(this.data1)
-
+    
   }
 
   componentDidMount() {
@@ -76,12 +72,12 @@ export default class Translation extends Component {
         'Content-Type': 'application/json'
       }, body: JSON.stringify({
         text: this.state.text,
-        model_id: this.locale1 + '-' + language,
+        model_id: this.locale + '-' + language,
       }),
     }).then((response) => response.json())
       .then((responseJson) => {
         console.log(responseJson)
-        console.log(this.locale1)
+        console.log(this.locale)
         if (responseJson.translations == undefined) {
           this.setState({ language: language, dataSource: this.ds.cloneWithRows(this.data1) })
         } else {

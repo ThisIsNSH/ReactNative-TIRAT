@@ -1,23 +1,27 @@
 # ReactNative-TIRAT
-### Text in Image Recognition and Translation. (In Dev State)
+### Text in Image Recognition and Translation. 
 
-The project is a cross platform app which detects and extracts the text in an image and provides translations in languages selected by the user. 
+TIRAT is a cross-platform multi-screen app which detects the text in an image and provides translations in different languages selected by the user.  
+
+### Screenshots 
+
+<img src="ss/ss1.png" width="25%">  <img src="ss/ss2.png" width="25%">  <img src="ss/ss3.png" width="25%">  <img src="ss/ss4.png" width="25%">
+<img src="ss/ss5.png" width="25%">  <img src="ss/ss6.png" width="25%">  <img src="ss/ss7.png" width="50%">  
 
 ### Used
 
-* React
 * React Native
+* Expo
 * ObjectiveC Xcode
 * Java AndroidStudio
 * JavaScript CSS
 * IBM Watson API
+* Cloud Vision API
 
-### What's Completed
+### Functionality
 
-* The languages are fetched from the API and dynamically rendered as Picker View for iOS and Android
-* User can select any language from the picker and view translated version of the text array 
-* Translations are fetched from another API of IBM Watson which returns the translated array which is then replaced with array of original text.
+* Initially user clicks or selects an image from camera roll and app gets the base64 string.
+* This base64 string is passed as the body in Google Cloud Vision API to get the text and language in it. 
+* The app routes to translation screen where initially all supported languages are fetched from IBM Watson language-translate API.
+* User then can pick any language from the list and the translations are shown which are fetched from IBM Watson Language-Translate API for all text instances found by Cloud Vision API. 
 
-### Screenshots iOS
-
-<img src="ss/ss1.png" width="25%">  <img src="ss/ss2.png" width="25%">  <img src="ss/ss3.png" width="25%">  <img src="ss/ss4.png" width="25%">
