@@ -45,7 +45,7 @@ export default class Translation extends Component {
     return fetch('https://gateway-lon.watsonplatform.net/language-translator/api/v3/identifiable_languages?version=2018-05-01', {
       method: 'GET',
       headers: {
-        'Authorization': 'Basic YXBpa2V5OndvSFF1MERhalpsOFFQc3FaUGF3OU92N080d2I4MmJVeXVPb0dMR0VwMFBh'
+        'Authorization': 'Basic '
       }
     }).then((response) => response.json())
       .then((responseJson) => {
@@ -68,7 +68,7 @@ export default class Translation extends Component {
     return fetch('https://gateway-lon.watsonplatform.net/language-translator/api/v3/translate?version=2018-05-01', {
       method: 'POST',
       headers: {
-        'Authorization': 'Basic YXBpa2V5OndvSFF1MERhalpsOFFQc3FaUGF3OU92N080d2I4MmJVeXVPb0dMR0VwMFBh',
+        'Authorization': 'Basic ',
         'Content-Type': 'application/json'
       }, body: JSON.stringify({
         text: this.state.text,

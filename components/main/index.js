@@ -47,7 +47,7 @@ export default class Main extends Component {
     console.log(result);
 
     if (!result.cancelled) {
-      return fetch('https://vision.googleapis.com/v1/images:annotate?key=AIzaSyC0Ivg5CydfzOA0j8EMdwlA9coA33yft64', {
+      return fetch('https://vision.googleapis.com/v1/images:annotate?key=', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

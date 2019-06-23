@@ -1,12 +1,12 @@
 # ReactNative-TIRAT
 ### Text in Image Recognition and Translation. 
 
-TIRAT is a cross-platform multi-screen app which detects the text in an image and provides translations in different languages selected by the user.  
+TIRAT is a cross-platform multi-screen app which detects the text in an image and provides translations in different languages selected by the user. Old Repo Link https://github.com/ThisIsNSH/OldTIRAT
 
 ### Screenshots 
 
 <img src="ss/ss1.png" width="25%">  <img src="ss/ss2.png" width="25%">  <img src="ss/ss3.png" width="25%">  <img src="ss/ss4.png" width="25%">
-<img src="ss/ss5.png" width="25%">  <img src="ss/ss6.png" width="25%">  <img src="ss/ss7.png" width="50%">  
+<img src="ss/ss5.PNG" width="25%">  <img src="ss/ss6.PNG" width="25%">  <img src="ss/ss7.png" width="50%">  
 
 ### Used
 
