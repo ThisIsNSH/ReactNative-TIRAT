@@ -7,32 +7,44 @@ export default class Translation extends Component {
   static navigationOptions = {
     headerMode: 'Select Language',
     navigationOptions: {
-        headerVisible: false,
+      headerVisible: false,
     }
   };
 
   constructor(props) {
     super(props)
 
-    this.text = ["Hello", "How are you?", "Good Morning", "What's your name?", "Thanks"];
     this.ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
     this.updateLanguage = this.updateLanguage.bind(this);
     var i = 0;
     this.data1 = [];
 
-    for (i = 0; i < this.text.length; i++) {
-      this.data1.push({ text: this.text[i], trans: this.text[i] });
-    }
-
     this.state = {
       dataSource: this.ds.cloneWithRows(this.data1),
       language: 'en',
-      languages: []
+      languages: [],
+      text: []
     };
 
+    const { navigation } = this.props;
+    const text1 = navigation.getParam('text', ["Hello", "How are you?", "Good Morning", "What's your name?", "Thanks"]);
+    this.locale1 = navigation.getParam('locale', 'en');
 
+    this.setState = {
+      text: text1.split(/\r?\n/).filter(function (value, index, arr) {
+        return value.length > 0;
+      })
+    }
+
+    for (i = 0; i < this.state.text.length; i++) {
+      this.data1.push({ text: this.state.text[i], trans: this.state.text[i] });
+    }
+
+    console.log(this.state.text)
+    console.log(this.data1)
 
   }
+
   componentDidMount() {
     return fetch('https://gateway-lon.watsonplatform.net/language-translator/api/v3/identifiable_languages?version=2018-05-01', {
       method: 'GET',
@@ -54,25 +66,29 @@ export default class Translation extends Component {
   }
 
   updateLanguage = (language) => {
+
     this.setState({ language: language })
+
     return fetch('https://gateway-lon.watsonplatform.net/language-translator/api/v3/translate?version=2018-05-01', {
       method: 'POST',
       headers: {
         'Authorization': 'Basic YXBpa2V5OndvSFF1MERhalpsOFFQc3FaUGF3OU92N080d2I4MmJVeXVPb0dMR0VwMFBh',
         'Content-Type': 'application/json'
       }, body: JSON.stringify({
-        text: this.text,
-        model_id: 'en-' + language,
+        text: this.state.text,
+        model_id: this.locale1 + '-' + language,
       }),
     }).then((response) => response.json())
       .then((responseJson) => {
+        console.log(responseJson)
+        console.log(this.locale1)
         if (responseJson.translations == undefined) {
           this.setState({ language: language, dataSource: this.ds.cloneWithRows(this.data1) })
         } else {
           var i = 0;
           var data1 = [];
-          for (i = 0; i < this.text.length; i++) {
-            data1.push({ text: this.text[i], trans: responseJson.translations[i].translation });
+          for (i = 0; i < this.state.text.length; i++) {
+            data1.push({ text: this.state.text[i], trans: responseJson.translations[i].translation });
           }
           this.setState({ language: language, dataSource: this.ds.cloneWithRows(data1) })
         }

@@ -62,10 +62,14 @@ export default class Main extends Component {
         }),
       }).then((response1) => response1.json())
         .then((responseJson) => {
-          this.props.navigation.navigate("Translation")
+          
           if (responseJson.responses[0].textAnnotations != undefined) {
             console.log(responseJson.responses[0].textAnnotations[0].description)
             console.log(responseJson.responses[0].textAnnotations[0].locale)
+            this.props.navigation.navigate("Translation", {
+              text: responseJson.responses[0].textAnnotations[0].description,
+              locale: responseJson.responses[0].textAnnotations[0].locale,
+            })
             this.setState({
               description: responseJson.responses[0].textAnnotations[0].description,
               locale: responseJson.responses[0].textAnnotations[0].locale
